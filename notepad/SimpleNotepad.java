@@ -1,13 +1,16 @@
 package notepad;
 
-public abstract class Notepad implements INotepad {
+public class SimpleNotepad implements INotepad {
 
-	Sheet[] sheets;
+	private Sheet[] sheets;
 
-	public Notepad(int sheetNumber) {
+	SimpleNotepad(int sheetNumber) {
 		if (sheetNumber > 0) {
 
 			this.sheets = new Sheet[sheetNumber];
+			for (int index = 0; index < sheets.length; index++) {
+				sheets[index] = new Sheet("", "");
+			}
 		} else {
 			System.out.println("Invalid notepad size");
 		}
@@ -16,7 +19,7 @@ public abstract class Notepad implements INotepad {
 	// Adds text to a page
 	@Override
 	public void addTextTo(String text, int pageNumber) {
-		if (pageNumber > 0 && pageNumber < sheets.length) {
+		if (pageNumber >= 0 && pageNumber < sheets.length) {
 			this.sheets[pageNumber].addText(text);
 		}
 
@@ -32,6 +35,7 @@ public abstract class Notepad implements INotepad {
 
 	}
 
+	// Delete page
 	@Override
 	public void delete(int pageNumber) {
 		if (pageNumber > 0 && pageNumber < sheets.length) {
@@ -40,18 +44,27 @@ public abstract class Notepad implements INotepad {
 
 	}
 
+	// Review all non blank pages
 	@Override
 	public void reviewAll() {
 
 		for (int sheet = 0; sheet < sheets.length; sheet++) {
 
-			if (!(sheets[sheet].getTopic()).equals("") || (!(sheets[sheet].getText().equals("")))) {
-				System.out.println("----------------------" + sheet + "----------------------");
-				sheets[sheet].review();
-			}
+			// if (!(sheets[sheet].getTopic()).equals("") ||
+			// (!(sheets[sheet].getText().equals("")))) {
+			System.out.println("----------------------" + sheet + "----------------------");
+			sheets[sheet].review();
+			// }
 
 		}
 
 	}
 
+	@Override
+	public void addTopicTo(String topic, int pageNumber) {
+		if (pageNumber >= 0 && pageNumber < sheets.length) {
+			this.sheets[pageNumber].addTopic(topic);
+		}
+
+	}
 }

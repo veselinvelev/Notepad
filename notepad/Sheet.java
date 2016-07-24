@@ -19,6 +19,15 @@ class Sheet {
 			System.out.println("Invalid text input.");
 		}
 	}
+	
+	void addTopic(String topic) {
+
+		if (topic != null) {
+			this.topic += topic;
+		} else {
+			System.out.println("Invalid topic input.");
+		}
+	}
 
 	void delete() {
 		this.setText("");
