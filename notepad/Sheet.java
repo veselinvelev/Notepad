@@ -19,11 +19,11 @@ class Sheet {
 			System.out.println("Invalid text input.");
 		}
 	}
-	
+
 	void addTopic(String topic) {
 
 		if (topic != null) {
-			this.topic += topic;
+			this.topic = topic;
 		} else {
 			System.out.println("Invalid topic input.");
 		}
@@ -40,7 +40,24 @@ class Sheet {
 		System.out.println("------------------------------------------------");
 	}
 
-	String getTopic() {
+	boolean searchWord(String word) {
+
+		return (this.getText()).contains(word);
+	}
+
+	boolean containsDigits() {
+
+		for (int index = 0; index < this.getText().length(); index++) {
+
+			if (this.getText().charAt(index) >= '0' && this.getText().charAt(index) <= '9') {
+				return true;
+			}
+
+		}
+		return false;
+	}
+
+	private String getTopic() {
 		return topic;
 	}
 

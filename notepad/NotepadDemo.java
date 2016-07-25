@@ -2,10 +2,12 @@ package notepad;
 
 public class NotepadDemo {
 
+	private static final int PAGES_IN_A_NOTEPAD = 3;
+
 	public static void main(String[] args) {
 
 //		SimpleNotepad simpleNotepad = new SimpleNotepad(5);
-		String text = "Az se kazvam Veso";
+		String text = "Test Text";
 
 //		for (int page = 0; page < 5; page++) {
 //
@@ -15,7 +17,7 @@ public class NotepadDemo {
 //
 //		for (int page = 0; page < 5; page++) {
 //
-//			simpleNotepad.addTopicTo(("VesoTopic" + page), page);
+//			simpleNotepad.addTopicTo(("Topic" + page), page);
 //
 //		}
 //
@@ -40,7 +42,7 @@ public class NotepadDemo {
 //		
 //		for (int page = 0; page < 3; page++) {
 //
-//			securedNotepad.addTopicTo(("VesoSecureadTopic" + page), page);
+//			securedNotepad.addTopicTo(("SecureadTopic" + page), page);
 //
 //		}
 //		
@@ -50,23 +52,54 @@ public class NotepadDemo {
 		
 		
 		
-		ISecuredNotepad inotepad = new SecuredNotepad("1", 3);
+//		ISecuredNotepad inotepad = new SecuredNotepad("1", 3);
 		
 		
-		for (int page = 0; page < 3; page++) {
+//		for (int page = 0; page < 3; page++) {
+//
+//			inotepad.addTextTo((text + page), page);
+//
+//		}
+//		
+//		for (int page = 0; page < 3; page++) {
+//
+//			inotepad.addTopicTo(("VesoSecureadTopic" + page), page);
+//
+//		}
+//		
+//		inotepad.reviewAll();
+//		inotepad.showPassword();
+		
+		
+		ElectronicSecuredNotepad electronicNotepad = new ElectronicSecuredNotepad("", -3);
+		electronicNotepad.start();
+		
+		for (int page = 0; page < PAGES_IN_A_NOTEPAD; page++) {
 
-			inotepad.addTextTo((text + page), page);
+			electronicNotepad.addTextTo((text + page), page);
 
 		}
 		
-		for (int page = 0; page < 3; page++) {
+		for (int page = 0; page < PAGES_IN_A_NOTEPAD; page++) {
 
-			inotepad.addTopicTo(("VesoSecureadTopic" + page), page);
+			electronicNotepad.addTopicTo(("SecureadTopic" + page), page);
 
 		}
 		
-		inotepad.reviewAll();
-		inotepad.showPassword();
+		for (int page = 0; page < PAGES_IN_A_NOTEPAD; page++) {
+
+			electronicNotepad.addTopicTo(("ELECTRONICSecureadTopic" + page), page);
+
+		}
+		
+		for (int page = 0; page < PAGES_IN_A_NOTEPAD; page++) {
+
+			electronicNotepad.addTextTo(page, (text + page + " Added new tekst"));
+
+		}
+		
+		electronicNotepad.reviewAll();
+		electronicNotepad.showPassword();
 
 
 		System.out.println("End");

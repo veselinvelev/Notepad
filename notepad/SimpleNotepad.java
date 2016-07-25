@@ -13,6 +13,9 @@ public class SimpleNotepad implements INotepad {
 			}
 		} else {
 			System.out.println("Invalid notepad size");
+			System.out.println("The notepad will have only one page!");
+			this.sheets = new Sheet[1];
+			sheets[0] = new Sheet("", "");
 		}
 	}
 
@@ -28,7 +31,7 @@ public class SimpleNotepad implements INotepad {
 	// Deletes current text on a page and adds new
 	@Override
 	public void addTextTo(int pageNumber, String text) {
-		if (pageNumber > 0 && pageNumber < sheets.length) {
+		if (pageNumber >= 0 && pageNumber < sheets.length) {
 			this.sheets[pageNumber].delete();
 			this.sheets[pageNumber].addText(text);
 		}
@@ -67,4 +70,28 @@ public class SimpleNotepad implements INotepad {
 		}
 
 	}
+
+	@Override
+	public boolean searchWord(String word) {
+		for (Sheet sheet : sheets) {
+			if (sheet.searchWord(word)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public void printAllPagesWithDigits() {
+
+		for (Sheet sheet : sheets) {
+
+			if (sheet.containsDigits()) {
+				sheet.review();
+			}
+
+		}
+
+	}
+
 }

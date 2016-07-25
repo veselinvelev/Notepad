@@ -4,20 +4,21 @@ import java.util.Scanner;
 
 class SecuredNotepad extends SimpleNotepad implements ISecuredNotepad {
 
-	private String password;
+	private static final String RANDOM_PASSWORD_GEN_BASE = "12345";
+	String password;
 
 	SecuredNotepad(String passwrd, int sheetNumber) {
 		super(sheetNumber);
 		if (passwrd != null && !passwrd.equals("")) {
 			this.password = passwrd;
 		} else {
-			this.password = genPassword(passwrd);
+			this.password = genPassword(RANDOM_PASSWORD_GEN_BASE);
 			System.out.println(
 					"You have entered invalid password so random pasword was genereted for you: " + this.getPassword());
 		}
 	}
 
-	private String getPassword() {
+	String getPassword() {
 		return password;
 	}
 
@@ -26,8 +27,8 @@ class SecuredNotepad extends SimpleNotepad implements ISecuredNotepad {
 		String password = enterPassword();
 
 		if (password.equals(this.getPassword())) {
-			System.out.println("password: "+ getPassword());
-			
+			System.out.println("password: " + getPassword());
+
 		} else {
 			System.out.println("Wrong password");
 		}
@@ -41,17 +42,18 @@ class SecuredNotepad extends SimpleNotepad implements ISecuredNotepad {
 			super.addTopicTo(topic, pageNumber);
 		} else {
 			System.out.println("Wrong password");
+			
 		}
 	}
 
-	public String enterPassword() {
+	String enterPassword() {
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
 		String password = scanner.nextLine();
 		return password;
 	}
 
-	public String genPassword(String password) {
+	private String genPassword(String password) {
 
 		char[] passwordArray = (password.toString()).toCharArray();
 
